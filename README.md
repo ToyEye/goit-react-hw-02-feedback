@@ -1,70 +1,140 @@
-# Getting Started with Create React App
+Создание и настройка React-App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+1. Создать репозиторий и склонировать на ПК
+2. Установить React application
+   Открыть терминал в папке проекта и установить react-app
 
-## Available Scripts
+npx create-react-app . 3. Удалить ненужные файлы
+3.1 public/index.html
+В папке public оставить только index.html. Удалить код из index.html, создать базовую разметку с помощью Emmet.
 
-In the project directory, you can run:
+Разметка может выглядеть так:
 
-### `npm start`
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
+3.2 /src
+В папке /src достаточно оставить index.js, App.js, index.css, App.css
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+В папке /src создать папку components для размещения будущих компонентов.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+3.3 index.js
+В index.js достаточно оставить следующий код:
 
-### `npm test`
+// index.js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+ReactDOM.render(
+<React.StrictMode>
+<App />
+</React.StrictMode>,
+document.getElementById('root'),
+);
+3.4 App.js
+В App.js достаточно оставить следующий код:
 
-### `npm run build`
+// App.js
+import './App.css';
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+function App() {
+return <div className="App">TEST</div>;
+}
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+export default App;
+3.4 App.css
+В App.css удалить ненужные стили.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+4. Запустить сервер проверить, нет ли ошибкок.
+   npm start
+5. Настройка pre-commit хуков
+   5.1 Установка зависимосте
+   Установить в проект следующие пакеты.
 
-### `npm run eject`
+Примечание: react-app корректно работает с более старой версией eslint 7.32.0
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+npm install --save-dev prettier eslint@7.11.0
+5.2 Инициализация lint-staged и husky
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+npx mrm lint-staged
+Пользователям Windows необходимо выполнить следующую команду. Она делает тоже самое.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+npx mrm@2 lint-staged
+5.3 Настройка в VSCode
+Провреить наличие следующих раширений:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Prettier - Code formatter
 
-## Learn More
+Formatting Toggle
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+ESLint
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Можно добавить настройки Prettier, создав файл .prettierrc.yaml в корневой папке проекта. Можно добавить следующие настройки.
 
-### Code Splitting
+printWidth: 100
+useTabs: false
+semi: true
+singleQuote: true
+trailingComma: 'all'
+bracketSpacing: true
+arrowParens: 'avoid'
+proseWrap: 'always'
+Открыть настройки VSCode и проверить следующее:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+autoSave
 
-### Analyzing the Bundle Size
+Превью настроек VSCode
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+formatOnSave
 
-### Making a Progressive Web App
+Превью настроек VSCode
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+codeActionsOnSave
 
-### Advanced Configuration
+Превью настроек VSCode
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Или же добавить код в файл settings.json
 
-### Deployment
+Ctrl + Shift + P => settings.json => Open Settings (JSON)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+{
+"files.autoSave": "onFocusChange",
+"editor.formatOnSave": true,
+"editor.codeActionsOnSave": {
+"source.fixAll.eslint": true
+}
+} 6. Настройка Деплоя
+Ссылка на create-react-app
 
-### `npm run build` fails to minify
+В package.json добавить следующию строку:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+"homepage": "https://https://имя*пользователя.github.io/имя*репозитория"
+Сделать билд через терминал:
+
+npm run build
+Установить пакет gh-pages
+
+npm install --save gh-pages
+В package.json в scripts добавить 2 скрипта:
+
+"scripts": {
+// добавить к остальным скриптам
+"predeploy": "npm run build",
+"deploy": "gh-pages -d build",
+Запустить деплой
+
+npm run deploy
+Скрипт predeploy запускать не нужно, он выполнится автоматически. Будет создана ветка gh-pages, выполнен автоккоммит и её пуш в ваш репозиторий на GitHub.сom, в настройках GitHub Pages автоматически будет подставлена ветка gh-pages, достаточно взять ссылку. Сам проект как обычно коммитим, пушим, чтобы код отразился в ветке main.
+
+7. Дальнейшая работа с проектом
+   Работаем, делаем коммиты и пушим на GitHub как обычно. Страница автоматически не обновится. Если нужно залить на GitHub Pages, делаете повторно npm run deploy. Или же можете настроить автодеплой. Меня этот вопрос на данный момент не волнует.
