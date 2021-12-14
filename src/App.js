@@ -43,7 +43,7 @@ class Feeedback extends Component{
     const { good } = this.state;
     const totalCount = this.countTotalFeedback()
     const positiveCount = good * 100 / totalCount ;
-    return positiveCount;
+    return positiveCount.toFixed(2);
   }
 
   render() {
