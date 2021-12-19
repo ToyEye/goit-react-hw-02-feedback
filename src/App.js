@@ -5,6 +5,7 @@ import Statistics from "./components/Statistic/";
 import Section from './components/Section/';
 import FeedbackOptions from './components/FeedbackOptions';
 import Notification from './components/NotificationMessage';
+import PropTypes from "prop-types";
 
 class Feeedback extends Component{
   
@@ -52,9 +53,20 @@ class Feeedback extends Component{
       
         <Container>
         <Section title="Pleas leave feedback" >
-          <FeedbackOptions options={this.onButtonGoodPush} onLeaveFeedback="Good" />
-          <FeedbackOptions options={this.onButtonNeutralPush} onLeaveFeedback="Neutral"/>
-          <FeedbackOptions options={this.onButtonBadPush} onLeaveFeedback="Bad"/>
+          <FeedbackOptions 
+          options={this.onButtonGoodPush} 
+          onLeaveFeedback="Good" 
+            name="good" />
+          
+          <FeedbackOptions 
+          options={this.onButtonNeutralPush} 
+          onLeaveFeedback="Neutral" 
+            name="neutral" />
+          
+          <FeedbackOptions 
+          options={this.onButtonBadPush} 
+          onLeaveFeedback="Bad" 
+          name="bad"/>
         </Section>
 
         <Section title="Statistic" >
@@ -73,6 +85,19 @@ class Feeedback extends Component{
      
     );
   }
+}
+
+Feeedback.propTypes = {
+  state: PropTypes.objectOf(PropTypes.shape({
+    good: PropTypes.number.isRequired,
+    neutral: PropTypes.number.isRequired,
+    bad: PropTypes.number.isRequired,
+  })),
+  onButtonGoodPush: PropTypes.func,
+  onButtonNeutralPush: PropTypes.func,
+  onButtonBadPush: PropTypes.func,
+  countTotalFeedback: PropTypes.func,
+  countPositiveFeedbackPercentage: PropTypes.func,
 }
 
 export default Feeedback;
