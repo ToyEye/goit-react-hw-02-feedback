@@ -8,7 +8,19 @@ import Notification from './components/NotificationMessage';
 import PropTypes from "prop-types";
 
 class Feeedback extends Component{
-  
+  static propTypes = {
+    state: PropTypes.objectOf(PropTypes.shape({
+      good: PropTypes.number.isRequired,
+      neutral: PropTypes.number.isRequired,
+      bad: PropTypes.number.isRequired,
+    })),
+    onButtonGoodPush: PropTypes.func,
+    onButtonNeutralPush: PropTypes.func,
+    onButtonBadPush: PropTypes.func,
+    countTotalFeedback: PropTypes.func,
+    countPositiveFeedbackPercentage: PropTypes.func,
+  }
+
   state = {
     good: 0,
     neutral: 0,
@@ -85,19 +97,6 @@ class Feeedback extends Component{
      
     );
   }
-}
-
-Feeedback.propTypes = {
-  state: PropTypes.objectOf(PropTypes.shape({
-    good: PropTypes.number.isRequired,
-    neutral: PropTypes.number.isRequired,
-    bad: PropTypes.number.isRequired,
-  })),
-  onButtonGoodPush: PropTypes.func,
-  onButtonNeutralPush: PropTypes.func,
-  onButtonBadPush: PropTypes.func,
-  countTotalFeedback: PropTypes.func,
-  countPositiveFeedbackPercentage: PropTypes.func,
 }
 
 export default Feeedback;
