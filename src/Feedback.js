@@ -38,20 +38,20 @@ class Feedback extends Component {
       <Container>
         <Section title="Pleas leave feedback">
           <FeedbackOptionsButton
-            options={this.onGiveStatisticButton}
-            onLeaveFeedback="Good"
+            onLeaveFeedback={this.onGiveStatisticButton}
+            options="Good"
             name="good"
           />
 
           <FeedbackOptionsButton
-            options={this.onGiveStatisticButton}
-            onLeaveFeedback="Neutral"
+            onLeaveFeedback={this.onGiveStatisticButton}
+            options="Neutral"
             name="neutral"
           />
 
           <FeedbackOptionsButton
-            options={this.onGiveStatisticButton}
-            onLeaveFeedback="Bad"
+            onLeaveFeedback={this.onGiveStatisticButton}
+            options="Bad"
             name="bad"
           />
         </Section>

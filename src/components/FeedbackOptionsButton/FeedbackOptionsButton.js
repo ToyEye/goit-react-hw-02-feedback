@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import s from './FeedbackOptionsButton.module.css';
 
 const FeedbackOptionsButton = ({ onLeaveFeedback, options, name }) => (
-  <button className={s.button} type="button" onClick={options} name={name}>
-    {onLeaveFeedback}
+  <button className={s.button} type="button" onClick={onLeaveFeedback} name={name}>
+    {options}
   </button>
 );
 
 FeedbackOptionsButton.prototype = {
-  onLeaveFeedback: PropTypes.string.isRequired,
-  options: PropTypes.func.isRequired,
+  options: PropTypes.string.isRequired,
+  onLeaveFeedback: PropTypes.func.isRequired,
   name: PropTypes.string,
 };
 
