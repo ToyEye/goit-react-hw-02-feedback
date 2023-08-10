@@ -1,22 +1,28 @@
-import React, { Component } from 'react';
-import './App.css';
-import Container from './components/Container';
-import StatisticsTable from './components/Statistic';
-import Section from './components/Section';
-import FeedbackOptionsButton from './components/FeedbackOptionsButton';
-import Notification from './components/NotificationMessage';
+import React, { Component, MouseEvent } from "react";
 
-class Feedback extends Component {
+import Container from "./components/Container";
+import StatisticsTable from "./components/Statistic";
+import Section from "./components/Section";
+import FeedbackOptionList from "./components/FeedbackOptionList";
+import Notification from "./components/NotificationMessage";
+
+type State = {
+  good: number;
+  neutral: number;
+  bad: number;
+};
+
+class Feedback extends Component<{}, State> {
   state = {
     good: 0,
     neutral: 0,
     bad: 0,
   };
 
-  onGiveStatisticButton = evt => {
-    const name = evt.target.name;
-    this.setState(prevState => {
-      return { [name]: prevState[name] + 1 };
+  onGiveStatisticButton = (evt: MouseEvent<HTMLButtonElement>) => {
+    const { name } = evt.currentTarget;
+    this.setState((prevState) => {
+      return { ...prevState, [name]: prevState[name as keyof State] + 1 };
     });
   };
 
@@ -29,7 +35,7 @@ class Feedback extends Component {
     const { good } = this.state;
     const totalCount = this.countTotalFeedback();
     const positiveCount = (good * 100) / totalCount;
-    return positiveCount.toFixed(2);
+    return Number(positiveCount.toFixed(2));
   };
 
   render() {
@@ -37,22 +43,9 @@ class Feedback extends Component {
     return (
       <Container>
         <Section title="Pleas leave feedback">
-          <FeedbackOptionsButton
+          <FeedbackOptionList
+            options={Object.keys(this.state)}
             onLeaveFeedback={this.onGiveStatisticButton}
-            options="Good"
-            name="good"
-          />
-
-          <FeedbackOptionsButton
-            onLeaveFeedback={this.onGiveStatisticButton}
-            options="Neutral"
-            name="neutral"
-          />
-
-          <FeedbackOptionsButton
-            onLeaveFeedback={this.onGiveStatisticButton}
-            options="Bad"
-            name="bad"
           />
         </Section>
 
